@@ -19,4 +19,5 @@ def register_pipelines() -> dict[str, Pipeline]:
 
     return {
         "feature_selection": feature_selection_pipeline
+
     }

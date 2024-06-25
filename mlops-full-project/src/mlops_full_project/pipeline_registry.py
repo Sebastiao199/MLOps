@@ -16,8 +16,7 @@ def register_pipelines() -> dict[str, Pipeline]:
         A mapping from pipeline names to ``Pipeline`` objects.
     """
     feature_selection_pipeline = feature_selection.create_pipeline()
-
+    
     return {
         "feature_selection": feature_selection_pipeline
-
     }

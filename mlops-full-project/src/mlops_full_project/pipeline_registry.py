@@ -6,7 +6,8 @@ from kedro.framework.project import find_pipelines
 from kedro.pipeline import Pipeline
 
 from mlops_full_project.pipelines import (
-    feature_selection
+    feature_selection,
+    pre_processing
 )
 
 def register_pipelines() -> dict[str, Pipeline]:
@@ -15,8 +16,11 @@ def register_pipelines() -> dict[str, Pipeline]:
     Returns:
         A mapping from pipeline names to ``Pipeline`` objects.
     """
+
     feature_selection_pipeline = feature_selection.create_pipeline()
-    
+    pre_processing_pipeline = pre_processing.create_pipeline()
+
     return {
-        "feature_selection": feature_selection_pipeline
+        "feature_selection": feature_selection_pipeline,
+        "pre_processing": pre_processing_pipeline
     }

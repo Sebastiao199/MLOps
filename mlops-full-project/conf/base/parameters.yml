@@ -1,2 +1,4 @@
 target_column: "readmitted_binary"
 to_feature_store: True
+test_fraction: 0.3
+random_state: 19

@@ -50,6 +50,8 @@ def clean_data(data: pd.DataFrame,) -> Tuple[pd.DataFrame, Dict]:
     df_cleaned.drop(['readmitted_multiclass'], axis=1, inplace=True)
     df_cleaned.drop('country', axis=1, inplace=True)
     df_cleaned.drop('weight', axis=1, inplace=True)
+    df_cleaned.drop('index', axis=1, inplace=True)
+    df_cleaned.drop('datetime', axis=1, inplace=True)
 
     fill_na(df_cleaned)
     rename_columns(df_cleaned)
@@ -86,7 +88,7 @@ def feature_engineer( data: pd.DataFrame, encoder, regr) -> pd.DataFrame:
     df = data.copy()
 
     if "readmitted_binary" in df.columns:
-        df["y"] = df["y"].map({"No":0, "Yes":1})
+        df["readmitted_binary"] = df["readmitted_binary"].map({"No":0, "Yes":1})
     
     #new profiling feature
     # In this step we should start to think on feature store

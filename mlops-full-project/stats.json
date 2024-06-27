@@ -1,3 +1,1 @@
-{"dataset": {"rows": 71236, "columns": 31, "file_size": 12973913}, "ingested_data": {"rows": 71236, "columns": 33, "file_size": 16167404}, "data_unit_tests_report": {"rows": 9, "columns": 12, "file_size": 1271}}
-
-
+{"preprocessed_training_data": {"rows": 56989, "columns": 39, "file_size": 7168073}, "X_train_data": {"rows": 39892, "columns": 38, "file_size": 4938112}, "X_test_data": {"rows": 17097, "columns": 38, "file_size": 2116654}}

@@ -1,0 +1,2 @@
+target_column: "readmitted_binary"
+to_feature_store: True

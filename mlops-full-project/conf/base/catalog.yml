@@ -7,9 +7,15 @@ dataset:
   type: pandas.CSVDataset
   filepath: data/01_raw/dataset.csv
 
-# data_cleaned:
-#   type: pandas.CSVDataset
-#   filepath: data/02_intermediate/data_cleaned.csv
+ingested_data:  
+  type: pandas.CSVDataset
+  filepath: data/02_intermediate/ingested.csv
+
+data_unit_tests_report:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/data_unit_tests_report.csv
+  save_args:
+    index: False
 
 ref_data:
   type: pandas.CSVDataset
@@ -73,3 +79,4 @@ best_columns:
   dataset:
     type: pickle.PickleDataset
     filepath: data/06_models/best_cols.pkl
+

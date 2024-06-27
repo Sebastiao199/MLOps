@@ -6,17 +6,16 @@ generated using Kedro 0.18.8
 
 from kedro.pipeline import Pipeline, node, pipeline
 
-from .nodes import ingestion
+from .nodes import run_data_unit_tests
 
 def create_pipeline(**kwargs) -> Pipeline:
     return pipeline(
         [
             node(
-                func= ingestion,
-                inputs=["dataset", "parameters"],
-                outputs= "ingested_data",
-                name="ingestion",
+                func=run_data_unit_tests,
+                inputs="ingested_data",
+                outputs="data_unit_tests_report",
+                name="data_unit_tests",
             ),
-
         ]
     )

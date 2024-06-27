@@ -6,3 +6,13 @@
 dataset:
   type: pandas.CSVDataset
   filepath: data/01_raw/dataset.csv
+
+ingested_data:  
+  type: pandas.CSVDataset
+  filepath: data/02_intermediate/ingested.csv
+
+data_unit_tests_report:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/data_unit_tests_report.csv
+  save_args:
+    index: False

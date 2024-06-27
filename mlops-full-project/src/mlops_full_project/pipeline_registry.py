@@ -23,8 +23,8 @@ def register_pipelines() -> dict[str, Pipeline]:
     ingestion_pipeline = ingestion.create_pipeline()
     data_unit_tests_pipeline = data_unit_tests.create_pipeline()
     split_data_pipeline = split_data.create_pipeline()
-    pre_processing_train_pipeline = preprocessing_train.create_pipeline()
-    pre_processing_batch_pipeline = preprocessing_batch.create_pipeline()
+    preprocessing_train_pipeline = preprocessing_train.create_pipeline()
+    preprocessing_batch_pipeline = preprocessing_batch.create_pipeline()
     split_train_pipeline = split_train.create_pipeline()
 
 
@@ -32,7 +32,7 @@ def register_pipelines() -> dict[str, Pipeline]:
         "ingestion": ingestion_pipeline,
         "data_unit_tests": data_unit_tests_pipeline,
         "split_data": split_data_pipeline,
-        "pre_processing_train": pre_processing_train_pipeline,
-        "pre_processing_batch": pre_processing_batch_pipeline,
+        "preprocessing_train": preprocessing_train_pipeline,
+        "preprocessing_batch": preprocessing_batch_pipeline,
         "split_train": split_train_pipeline
     }

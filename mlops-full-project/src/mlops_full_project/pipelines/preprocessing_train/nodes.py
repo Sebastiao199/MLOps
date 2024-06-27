@@ -30,7 +30,6 @@ import logging
 from typing import Any, Dict, Tuple
 import numpy as np
 import pandas as pd
-# from sklearn.preprocessing import OneHotEncoder , LabelEncoder
 from sklearn.ensemble import RandomForestRegressor
 import category_encoders as ce
 
@@ -53,6 +52,8 @@ def clean_data(data: pd.DataFrame,) -> Tuple[pd.DataFrame, Dict, Dict]:
     df_cleaned.drop(['readmitted_multiclass'], axis=1, inplace=True)
     df_cleaned.drop('country', axis=1, inplace=True)
     df_cleaned.drop('weight', axis=1, inplace=True)
+    df_cleaned.drop('index', axis=1, inplace=True)
+    df_cleaned.drop('datetime', axis=1, inplace=True)
 
     fill_na(df_cleaned)
     rename_columns(df_cleaned)
@@ -87,7 +88,7 @@ def feature_engineer(data: pd.DataFrame):
     df = data.copy()
 
     if "readmitted_binary" in df.columns:
-        df["y"] = df["y"].map({"No":0, "Yes":1})
+        df["readmitted_binary"] = df["readmitted_binary"].map({"No":0, "Yes":1})
     
     #new profiling feature
     # In this step we should start to think on feature store
@@ -150,7 +151,6 @@ def feature_engineer(data: pd.DataFrame):
     cols_encoded = count_encoder.transform(df[columns_to_encode])
 
     df_encoded = pd.concat([cols_encoded, other_columns], axis=1)
-
 
     # Imputing missing values in 'Midpoint_Age' using a Random Forest Regressor
 

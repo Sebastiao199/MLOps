@@ -12,10 +12,10 @@ ingested_data:
   filepath: data/02_intermediate/ingested_data.csv
 
 data_unit_tests_report:
-  type: pandas.CSVDataset
-  filepath: data/08_reporting/data_unit_tests_report.csv
-  save_args:
-    index: False
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: pandas.CSVDataset
+    filepath: data/08_reporting/data_unit_tests_report.csv
 
 ref_data:
   type: pandas.CSVDataset
@@ -74,9 +74,59 @@ y_test_data:
   type: pandas.CSVDataset
   filepath: data/05_model_input/y_test.csv 
 
+production_columns:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: pickle.PickleDataset
+    filepath: data/06_models/production_cols.pkl
+
 best_columns:
   type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
   dataset:
     type: pickle.PickleDataset
     filepath: data/06_models/best_cols.pkl
+
+production_model:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: pickle.PickleDataset
+    filepath: data/06_models/production_model.pkl
+
+champion_model:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: pickle.PickleDataset
+    filepath: data/06_models/champion_model.pkl
+
+production_model_metrics:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: json.JSONDataset
+    filepath: data/08_reporting/production_model_metrics.json
+
+drift_result:
+  type: pandas.CSVDataset
+  filepath: data/08_reporting/drift_result.csv
+
+output_plot:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/shap_plot.png
+
+df_with_predict:  
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/df_with_predict.csv
+
+predict_describe:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: json.JSONDataset
+    filepath: data/08_reporting/predict_describe.csv
+
+score_distribution:
+  type: kedro_mlflow.io.artifacts.MlflowArtifactDataset
+  dataset:
+    type: matplotlib.MatplotlibWriter
+    filepath: data/08_reporting/score_distribution.png
 

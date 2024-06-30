@@ -2,3 +2,33 @@ target_column: "readmitted_binary"
 to_feature_store: True
 test_fraction: 0.3
 random_state: 19
+metric_features:
+ - average_pulse_bpm
+ - length_of_stay
+ - number_lab_tests
+ - non_lab_procedures
+ - number_of_medications
+ - number_diagnoses 
+ - number_generic_medications 
+ - outpatient_visits
+ - number_encounters_total
+ - emergency_visits 
+ - inpatient_visits 
+ - Midpoint_Age 
+ - Total_visits
+ - Serious_condition_visits
+variance_threshold: 1e-8
+mi_threshold: 0.01
+point_biserial_threshold: 0.1
+feature_selection:
+ - variance_thresholding
+ - point_biserial
+ - mutual_info
+ - rfe
+baseline_model_params:
+  n_estimators: 100
+  max_depth: 5
+  random_state: 19
+  class_weight: "balanced"
+  n_jobs: -1
+use_feature_selection: True

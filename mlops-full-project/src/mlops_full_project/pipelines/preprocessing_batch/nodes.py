@@ -116,27 +116,6 @@ def feature_engineer( data: pd.DataFrame, encoder, regr) -> pd.DataFrame:
     df['Total_visits'] = df['inpatient_visits'] + df['outpatient_visits'] + df['emergency_visits']
     df['Serious_condition_visits'] = df['inpatient_visits'] + df['emergency_visits']
     
-    
-    
-    # numerical_features = df.select_dtypes(exclude=['object','string','category']).columns.tolist()
-    # categorical_features = df.select_dtypes(include=['object','string','category']).columns.tolist()
-
-    # #Exercise create an assert for numerical and categorical features
-    
-
-    # OH_cols= pd.DataFrame(OH_encoder.transform(df[categorical_features]))
-
-    # # Adding column names to the encoded data set.
-    # OH_cols.columns = OH_encoder.get_feature_names_out(categorical_features)
-
-    # # One-hot encoding removed index; put it back
-    # OH_cols.index = df.index
-
-    # # Remove categorical columns (will replace with one-hot encoding)
-    # num_df = df.drop(categorical_features, axis=1)
-
-    # # Add one-hot encoded columns to numerical features
-    # df_final = pd.concat([num_df, OH_cols], axis=1)
 
     columns_to_encode = ['race','payer_code','admission_type','medical_specialty','discharge_disposition',
                      'admission_source','primary_diagnosis_types','secondary_diagnosis_types',
@@ -153,6 +132,16 @@ def feature_engineer( data: pd.DataFrame, encoder, regr) -> pd.DataFrame:
     # Reset indices
     known_age = known_age.reset_index(drop=True)
     unknown_age = unknown_age.reset_index(drop=True)
+
+    unknown_age_list = list(unknown_age.columns)
+    unknown_age_list.sort()
+
+    unknown_age = unknown_age[unknown_age_list]
+
+    known_age_list = list(known_age.columns)
+    known_age_list.sort()
+
+    known_age = known_age[known_age_list]
 
     # Predict the missing ages
     predicted_ages = regr.predict(unknown_age.drop(['Midpoint_Age'], axis=1))

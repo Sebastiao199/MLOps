@@ -116,25 +116,6 @@ def feature_engineer(data: pd.DataFrame):
     df['Total_visits'] = df['inpatient_visits'] + df['outpatient_visits'] + df['emergency_visits']
     df['Serious_condition_visits'] = df['inpatient_visits'] + df['emergency_visits']
 
-    # numerical_features = df.select_dtypes(exclude=['object','string','category']).columns.tolist()
-    # categorical_features = df.select_dtypes(include=['object','string','category']).columns.tolist()
-    #Exercise create an assert for numerical and categorical features
-    
-    # OH_encoder = OneHotEncoder(handle_unknown='ignore', sparse_output=False)
-    # OH_cols= pd.DataFrame(OH_encoder.fit_transform(df[categorical_features]))
-
-    # # Adding column names to the encoded data set.
-    # OH_cols.columns = OH_encoder.get_feature_names_out(categorical_features)
-
-    # # One-hot encoding removed index; put it back
-    # OH_cols.index = df.index
-
-    # # Remove categorical columns (will replace with one-hot encoding)
-    # num_df = df.drop(categorical_features, axis=1)
-
-    # # Add one-hot encoded columns to numerical features
-    # df_final = pd.concat([num_df, OH_cols], axis=1)
-
 
     # Encoding categorical columns using CountEncoder
     
@@ -161,6 +142,18 @@ def feature_engineer(data: pd.DataFrame):
     known_age = known_age.reset_index(drop=True)
     unknown_age = unknown_age.reset_index(drop=True)
 
+    unknown_age_list = list(unknown_age.columns)
+    unknown_age_list.sort()
+
+    unknown_age = unknown_age[unknown_age_list]
+
+    known_age_list = list(known_age.columns)
+    known_age_list.sort()
+
+    known_age = known_age[known_age_list]
+
+    log = logging.getLogger(__name__)
+
     # Create the training data for the model
     X = known_age.drop(['Midpoint_Age'], axis=1)
     y = known_age['Midpoint_Age']
@@ -174,8 +167,6 @@ def feature_engineer(data: pd.DataFrame):
 
     # Fill in the missing values using the original indices
     df_encoded.loc[df_encoded['Midpoint_Age'].isnull(), 'Midpoint_Age'] = predicted_ages
-
-    log = logging.getLogger(__name__)
 
     log.info(f"The final dataframe has {len(df_encoded.columns)} columns.")
 
